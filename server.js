@@ -72,7 +72,7 @@ router.route("/movies")
 	});
 
 })
-
+// get all movies
 .get(function(req, res) {
 	Movie.find(function(err, movies) {
 		if(err)
@@ -82,8 +82,19 @@ router.route("/movies")
 	});
 });
 
+router.route("/movies/:movie_id")
 
+// delete the movie with this id (accessed at DELETE http://localhost:8080/api/movies/:movie_id)
+.delete(function(req, res) {
+	Movie.remove({
+		_id: req.params.movie_id
+	}, function(err, movie) {
+		if (err)
+			res.send(err);
 
+		res.json({ message: "Successfully deleted" })
+	});
+});
 
 
 // REGISTER ROUTES -----------------

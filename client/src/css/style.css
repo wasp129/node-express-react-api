@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700');
+
+body {
+	font-family: "Roboto", sans-serif;
+}
+
+table {
+	border-spacing: 0;
+}
+
+td {
+	border-bottom: 1px solid rgba(34,36,38,.15);
+	border-left: 1px solid rgba(34,36,38,.15);
+	border-right: 1px solid rgba(34,36,38,.15);
+}
+
+input {
+	width: 60%;
+	margin: 0 auto;
+	height: 40px;
+	font-size: 20px;
+	display: block;
+}
+
+button {
+	cursor: pointer;
+    display: inline-block;
+    min-height: 1em;
+    outline: 0;
+    border: none;
+    vertical-align: baseline;
+    background: #e0e1e2 none;
+    color: rgba(0,0,0,.6);
+    font-family: "Roboto", sans-serif;
+    margin: 0 .25em 0 0;
+    padding: .78571429em 1.5em .78571429em;
+    text-transform: none;
+    text-shadow: none;
+    font-weight: 400;
+    line-height: 1em;
+    font-style: normal;
+    text-align: center;
+    text-decoration: none;
+    border-radius: .28571429rem;
+}
+
+.addMovie {
+	height: 40px;
+	width: 90px;
+	margin: 20px auto;
+	display: block;
+}
+
+.movieTable {
+	/*border: 1px solid rgba(34,36,38,.15);*/
+	width: 80%;
+	text-align: center;
+	margin: 40px auto;
+}
+
+.movieTable thead {
+	background-color: #f9fafb;
+}
+
+/*.movieTable thead tr {
+	border-bottom: 1px solid black;
+}*/
+
+.movieTable thead tr th {
+	padding: 15px;
+	border: 1px solid rgba(34,36,38,.15);
+}
+
+.movieTable tbody tr:hover {
+	background-color: #f9fafb;
+}
+
+

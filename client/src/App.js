@@ -24,26 +24,29 @@ class NewMovie extends Component {
     this.handleTextChange = this.handleTextChange.bind(this);
     this.insertNewMovie = this.insertNewMovie.bind(this);
     this.getData = this.getData.bind(this);
-    this.onClick = this.onClick.bind(this);
-  }
+    this.delete = this.delete.bind(this);
+  };
 
 handleTextChange(event) {
   this.setState({
     name: event.target.value
   });
-}
+};
 
 componentDidMount() {
   this.getData(this);
-}
+};
+
+componentDidUpdate() {
+  this.getData(this);
+};
 
 getData(event) {
   axios.get("api/movies")
   .then(function(response) {
     event.setState({allMovies: response.data});
-      console.log(response.data)
   });
-}
+};
 
 insertNewMovie() {
   axios.post("/api/movies",
@@ -56,33 +59,46 @@ insertNewMovie() {
     }).then(function(response) {
       console.log(response.data);
     });
-}
+};
 
-onClick(e) {
-      this.insertNewMovie(this);
+delete(id){
+    axios.delete("/api/movies/" + id)
+      .then(function(response) {
+          console.log(response);
+    });
       this.getData(this);
-    }
+};
 
   render() {
     return (
       <div>
         <h2>Add new movie</h2>
         <input type="text" title="name" placeholder="Title" value={this.state.name} onChange={this.handleTextChange} />
-        <button onClick={this.onClick}>Add</button>
-        {
-          this.state.allMovies.map(function(exp){
-            return (
-              <div key={exp._id}>
-                <h3>{exp.name}</h3>
-              </div>
-            );
-          })
-        }
+        <button className="addMovie" onClick={this.insertNewMovie}>Add</button>
+        <table className="movieTable">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              this.state.allMovies.map(function(mov){
+                return (
+                  <tr key={mov._id} id={mov._id}>
+                    <td><p>{mov.name}</p></td>
+                    <td><button onClick={() => {this.delete(mov._id)}}>Delete</button></td>
+                  </tr>
+                );
+              }.bind(this))
+            }
+        </tbody>
+        </table>
+        
       </div>
     ) 
   }
 }
-
-
 
 export default App;
