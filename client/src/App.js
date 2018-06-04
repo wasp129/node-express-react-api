@@ -25,6 +25,7 @@ class NewMovie extends Component {
     this.insertNewMovie = this.insertNewMovie.bind(this);
     this.getData = this.getData.bind(this);
     this.delete = this.delete.bind(this);
+    this.onClick = this.onClick.bind(this);
   };
 
 handleTextChange(event) {
@@ -34,10 +35,6 @@ handleTextChange(event) {
 };
 
 componentDidMount() {
-  this.getData(this);
-};
-
-componentDidUpdate() {
   this.getData(this);
 };
 
@@ -69,12 +66,17 @@ delete(id){
       this.getData(this);
 };
 
+onClick(e) {
+  this.insertNewMovie(this);
+  this.getData(this);
+}
+
   render() {
     return (
       <div>
         <h2>Add new movie</h2>
         <input type="text" title="name" placeholder="Title" value={this.state.name} onChange={this.handleTextChange} />
-        <button className="addMovie" onClick={this.insertNewMovie}>Add</button>
+        <button className="addMovie" onClick={this.onClick}>Add</button>
         <table className="movieTable">
           <thead>
             <tr>
