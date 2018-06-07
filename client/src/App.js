@@ -38,11 +38,14 @@ componentDidMount() {
   this.getData(this);
 };
 
-getData(event) {
+getData() {
   axios.get("api/movies")
-  .then(function(response) {
-    event.setState({allMovies: response.data});
-  });
+  .then((response) => {
+    this.setState({
+      allMovies: response.data
+    });
+    console.log(response.data);
+  })
 };
 
 insertNewMovie() {
@@ -53,22 +56,21 @@ insertNewMovie() {
       headers: {
         "Content-Type": "application/x-www-form-urlencoded"
       }
-    }).then(function(response) {
-      console.log(response.data);
+    }).then((response) => {
+      this.getData(this);
     });
 };
 
 delete(id){
     axios.delete("/api/movies/" + id)
-      .then(function(response) {
-          console.log(response);
-    });
-      this.getData(this);
+          .then((response) => {
+            console.log(response);
+            this.getData(this);
+          })
 };
 
 onClick(e) {
   this.insertNewMovie(this);
-  this.getData(this);
 }
 
   render() {
