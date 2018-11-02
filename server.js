@@ -12,6 +12,7 @@ var express = require("express");
 var bodyParser = require("body-parser");
 var chalk = require("chalk");
 var mongoose = require("mongoose");
+const path = require('path');
 var Movie = require("./app/models/movies") 	// movie schema
 var dotenv = require("dotenv").config();
 
@@ -100,7 +101,7 @@ router.route("/movies/:movie_id")
 // =============================================================================================================================================
 
 app.use("/api", router);
-
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 // START THE SERVER
 // =============================================================================================================================================
