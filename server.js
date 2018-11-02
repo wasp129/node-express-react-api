@@ -13,6 +13,7 @@ var bodyParser = require("body-parser");
 var chalk = require("chalk");
 var mongoose = require("mongoose");
 var Movie = require("./app/models/movies") 	// movie schema
+var dotenv = require("dotenv").config();
 
 var app = express();
 
@@ -24,10 +25,10 @@ app.use(bodyParser.json());
 
 
 var port = process.env.PORT || 8080;		// set port
-
+var db = process.env.DB_CONN;				// connection string (comes from environment variable)
 // connect to our database, returns 1 if connection is succesful
 
-mongoose.connect("mongodb://localhost/movieDB", function (err) {
+mongoose.connect(db, function (err) {
 	if (err) {
 		console.log(chalk.red("Error connecting to database: " + err))
 	} else {
@@ -67,7 +68,6 @@ router.route("/movies")
 	movie.save(function(err) {
 		if (err) 
 			res.send(err);
-
 		res.json({ message: "Movie created!" });
 	});
 
@@ -77,7 +77,6 @@ router.route("/movies")
 	Movie.find(function(err, movies) {
 		if(err)
 			res.send(err);
-
 		res.json(movies);
 	});
 });
